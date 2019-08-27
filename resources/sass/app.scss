@@ -1,0 +1,54 @@
+// Fonts
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+body{
+    background-color: #e47517FF;
+}
+
+.navbar {
+    background-color: #e4751788; 
+}
+
+html{
+    font-size: .8rem;
+}
+
+@include media-breakpoint-up(sm){
+    html{
+        font-size: 1rem;
+    }
+}
+
+@include media-breakpoint-up(lg){
+    html{
+        font-size: 1rem;
+    }
+}
+
+.navbar-expand-md {
+    @include font-size(1.4rem);
+}
+
+.navbar-expand {
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.base {
+    fill:#003dd4;
+    cursor: pointer;
+    -webkit-transition: fill .5s ease-out;
+    -moz-transition: fill .5s ease-out;
+    -o-transition: fill .5s ease-out;
+    transition: fill .5s ease-out;
+}
+
+.base:hover {
+    fill: #bd4;
+}
