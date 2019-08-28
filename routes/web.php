@@ -14,3 +14,17 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::resource('annonce', 'AdController')
+    ->parameters([
+        'annonce' => 'ad'
+    ])->except([
+    'index', 'show', 'destroy'
+]);
+
+Route::prefix('annonces')->group(function(){
+    Route::get('voir/{ad}', 'AdController@show')->name('annonces.show');
+    Route::get('{region?}/{departement?}/{commune?}', 'AdController@index')->name('annonces.index');
+    Route::post('recherche', 'AdController@search')->name('annonces.search')->middleware('ajax');
+
+});

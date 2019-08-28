@@ -34974,8 +34974,8 @@ try {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/lamine/php/adverts/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/lamine/php/adverts/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/lamine/Bureau/php/adverts/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/lamine/Bureau/php/adverts/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
