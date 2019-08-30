@@ -28,3 +28,8 @@ Route::prefix('annonces')->group(function(){
     Route::post('recherche', 'AdController@search')->name('annonces.search')->middleware('ajax');
 
 });
+
+
+Route::middleware('ajax')->group(function(){
+    Route::post('message', 'UserController@message')->name('message');
+});

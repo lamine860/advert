@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Region;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -69,9 +70,11 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Ad $ad)
     {
-        //
+        $this->authorize('show', $ad);
+        $photos = $ad->photos;
+        return view('ad', compact('ad', 'photos'));
     }
 
     /**

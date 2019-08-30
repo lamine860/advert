@@ -31,4 +31,14 @@ class AdRepository
             ->latest()
             ->paginate(3);
     }
+
+    public function getPhotos(Ad $ad):array
+    {
+        return $ad->photos;
+    }
+
+    public function getById(int $id)
+    {
+        return Ad::findOrFail($id);
+    }
 }
