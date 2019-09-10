@@ -14,7 +14,7 @@
 
     <!-- Fonts -->
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">  
+    *<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">  
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -51,7 +51,7 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="nav-link" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -67,7 +67,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main role="main">
             @yield('content')
         </main>
         <nav class="navbar navbar-expand fixed-bottom navbar-dark">

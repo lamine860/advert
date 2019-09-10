@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('annonce', 'AdController')
+Route::resource('annonces', 'AdController')
     ->parameters([
         'annonce' => 'ad'
     ])->except([
@@ -32,4 +32,9 @@ Route::prefix('annonces')->group(function(){
 
 Route::middleware('ajax')->group(function(){
     Route::post('message', 'UserController@message')->name('message');
+    Route::post('images-save', 'UploadImagesController@store')->name('save-images');
+    Route::delete('images-delete', 'UploadImagesController@destroy')->name('destroy-images');
+    Route::get('images-server','UploadImagesController@getServerImages')->name('server-images');
 });
+
+

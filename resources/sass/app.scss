@@ -1,10 +1,11 @@
 // Fonts
 
 // Variables
-@import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+@import "~dropzone/dist/dropzone.css";
 
 
 body{
@@ -63,4 +64,28 @@ a.blockAd {
     &:hover .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+}
+
+
+#my-dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    .message {
+        font-family: "Segoe UI Light", "Arial", serif;
+        font-weight: 600;
+        color: #0087F7;
+        @include font-size(1.5em);
+        letter-spacing: 0.05em;
+    }
+}
+a.dz-remove {
+    text-decoration: none !important;
+    &:hover {
+        color: red;
+        font-size: 1rem !important;
+    }
+}
+
+#accordion .btn-link a {
+    text-decoration: none;
 }

@@ -41,4 +41,9 @@ class AdRepository
     {
         return Ad::findOrFail($id);
     }
+
+    public function create($data)
+    {
+        return Ad::create($data);
+    }
 }
