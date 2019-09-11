@@ -26,7 +26,7 @@
           Annonces
         </div>
         <li class="nav-item @if(request()->route()->getName() == 'admin.ads') active @endif">
-            <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('admin.ads') }}">
                 <i class="fas fa-fw fa-question"></i>
             <span>A modérer</span></a>
         </li>

@@ -32,6 +32,7 @@ class AdController extends Controller
         return view('partials.ads', compact('ads'));
     }
 
+
     /**
      * Display a listing of the resource.
      *

@@ -62,4 +62,20 @@ class AdRepository
         }
         return Ad::where('limit', '<', Carbon::now())->count();
     }
+    public function noActive($nbr)
+    {
+        return Ad::whereActive(false)->latest()->paginate($nbr);
+    }
+
+    public function approve($ad)
+    {
+        $ad->active = true;
+        $ad->save();
+    }
+
+
+    public function delete($ad)
+    {
+        $ad->delete();
+    }
 }

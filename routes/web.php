@@ -40,4 +40,11 @@ Route::middleware('ajax')->group(function(){
 
 Route::prefix('admin')->middleware('admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::prefix('annonces')->group(function(){
+        Route::get('/', 'AdminController@ads')->name('admin.ads');
+        Route::middleware('ajax')->group(function () {
+            Route::post('approve/{ad}', 'AdminController@approve')->name('admin.approve');
+            Route::post('refuse', 'AdminController@refuse')->name('admin.refuse');
+        });
+    });
 });
