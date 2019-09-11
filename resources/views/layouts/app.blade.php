@@ -50,6 +50,11 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Inscription') }}</a>
                             </li>
                         @else
+                            @admin
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.index') }}">Administration</a>
+                            </li>
+                            @endadmin
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

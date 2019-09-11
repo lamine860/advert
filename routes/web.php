@@ -38,3 +38,6 @@ Route::middleware('ajax')->group(function(){
 });
 
 
+Route::prefix('admin')->middleware('admin')->group(function(){
+    Route::get('/', 'AdminController@index')->name('admin.index');
+});
