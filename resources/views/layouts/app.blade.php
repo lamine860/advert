@@ -54,6 +54,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.index') }}">Administration</a>
                             </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.index') }}">Mon compte</a>
+                            </li>
                             @endadmin
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"
@@ -77,8 +81,8 @@
         </main>
         <nav class="navbar navbar-expand fixed-bottom navbar-dark">
             <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link " href="">Mentions légales</a>
-                <a class="nav-item nav-link " href="">Politique de confidentialité</a>
+                <a class="nav-item nav-link " href="{{ route('legal') }}">Mentions légales</a>
+                <a class="nav-item nav-link " href="{{ route('confidentialite') }}">Politique de confidentialité</a>
             </div>
         </nav>
     </div>

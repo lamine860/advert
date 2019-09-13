@@ -36,4 +36,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectTo()
+    {
+        return auth()->user()->admin ? route('admin.index') : route('user.index');
+    }
+
+    public function actives(Request $request)
+    {
+        $ads = $this->adRepository->active($request->user(), 5);
+        return view('user.actives', compact('ads'));
+    }
 }

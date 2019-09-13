@@ -61,3 +61,21 @@ Route::prefix('admin/annonces')->group(function () {
         Route::delete('destroy/{ad}', 'AdminController@destroy')->name('admin.destroy');
     });
 });
+
+
+Route::prefix('utilisateur')->middleware('user')->group(function () {
+    Route::get('/', 'UserController@index')->name('user.index');
+    Route::prefix('annonces')->group(function () {
+        Route::get('actives', 'UserController@actives')->name('user.actives');
+        Route::get('obsoletes', 'UserController@obsoletes')->name('user.obsoletes');
+        Route::get('attente', 'UserController@attente')->name('user.attente');
+    });
+    Route::prefix('profil')->group(function () {
+        Route::get('email', 'UserController@emailEdit')->name('user.email.edit');
+        Route::put('email', 'UserController@emailUpdate')->name('user.email.update');
+        Route::get('donnees', 'UserController@data')->name('user.data');
+    });
+});
+
+Route::view('legal', 'legal')->name('legal');
+Route::view('confidentialite', 'confidentialite')->name('confidentialite');

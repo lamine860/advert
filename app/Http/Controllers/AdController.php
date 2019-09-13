@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdStore;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\AdUpdate;
 use App\Repositories\AdRepository;
 
 class AdController extends Controller
@@ -116,19 +117,24 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ad = Ad::findOrFail($id);
+        return view('edit', compact('ad'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $ad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdUpdate $request, $id)
     {
-        //
+        $ad = Ad::findOrFail($id);
+        $this->authorize('manage', $ad);
+        $this->adRepository->update($ad, $request->all());
+        $request->session()->flash('status', "L'annonce a bien été modifiée.");
+        return back();
     }
 
     /**

@@ -92,4 +92,36 @@ class AdRepository
         $ad->save();
         return $limit;
     }
+    public function activeCount($ads)
+    {
+        return $ads->where('active', true)->where('limit', '>=', Carbon::now())->count();
+    }
+    public function getByUser($user)
+    {
+        return $user->ads()->get();
+    }
+
+
+    public function active($user, $nbr)
+    {
+        return $user->ads()->whereActive(true)->where('limit', '>=', Carbon::now())->paginate($nbr);
+    }
+
+
+    public function update($ad, $data)
+    {
+        $ad->update($data);
+    }
+
+
+    public function attente($user, $nbr)
+    {
+        return $user->ads()->whereActive(false)->paginate($nbr);
+    }
+
+
+    public function obsoleteForUser($user, $nbr)
+    {
+        return $user->ads()->where('limit', '<', Carbon::now())->latest('limit')->paginate($nbr);
+    }
 }
