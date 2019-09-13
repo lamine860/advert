@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
+use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Notifications\AdRefuse;
 use App\Notifications\AdApprove;
 use App\Repositories\AdRepository;
 use App\Http\Requests\MessageRefuse;
+use App\Notifications\MessageApprove;
 use App\Repositories\MessageRepository;
+use App\Http\Requests\MessageRefuseRequest;
+use App\Notifications\MessageRefuse as messageRefuseNotification;
 
 class AdminController extends Controller
 {
@@ -55,5 +60,57 @@ class AdminController extends Controller
         return response()->json(['id' => $ad->id]);
     }
 
+    public function obsoletes()
+    {
+        $ads = $this->adRepository->obsolete(5);
+        return view('admin.obsoletes', compact('ads'));
+    }
+
+
+    public function addWeek(Request $request, Ad $ad)
+    {
+        $this->authorize('manage', $ad);
+        $limit = $this->adRepository->addWeek($ad);
+        return response()->json([
+            'limit' => $limit->format('d-m-Y'),
+            'ok' => $limit->greaterThan(Carbon::now()),
+        ]);
+    }
+
+
+    public function destroy(Request $request, Ad $ad)
+    {
+        $this->authorize('manage', $ad);
+        $this->adRepository->delete($ad);
+        $request->session()->flash('status', "L'annonce a bien été supprimée.");
+        return response()->json();
+    }
+
+
+    public function messages()
+    {
+        $messages = $this->messagerepository->all(5);
+        return view('admin.messages', compact('messages'));
+    }
+
+
+    public function messageApprove(Request $request, Message $message)
+    {
+        $ad = $this->messagerepository->getAd($message);
+        $ad->notify(new MessageApprove($ad, $message));
+        $this->messagerepository->delete($message);
+        $request->session()->flash('status', "Le message a bien été approuvé et le rédacteur va être notifié.");
+        return response()->json(['id' => $message->id]);
+    }
+    
+    public function messageRefuse(MessageRefuseRequest $request)
+    {
+        $message = $this->messagerepository->getById($request->id);
+        $ad = $this->messagerepository->getAd($message);
+        $ad->notify(new MessageRefuseNotification($ad, $message, $request->message));
+        $this->messagerepository->delete($message);
+        $request->session()->flash('status', "Le message a bien été refusé et le rédacteur va être notifié.");
+        return response()->json(['id' => $ad->id]);
+    }
 
 }

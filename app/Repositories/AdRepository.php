@@ -78,4 +78,18 @@ class AdRepository
     {
         $ad->delete();
     }
+
+    public function obsolete($nbr)
+    {
+        return Ad::where('limit', '<', Carbon::now())->latest('limit')->paginate($nbr);
+    }
+    
+    public function addWeek($ad)
+    {
+        $limit = Carbon::create($ad->limit);
+        $limit->addWeek();
+        $ad->limit = $limit;
+        $ad->save();
+        return $limit;
+    }
 }

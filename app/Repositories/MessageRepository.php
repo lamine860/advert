@@ -17,4 +17,26 @@ class MessageRepository
     {
         return Message::count();
     }
+
+    public function all($nbr)
+    {
+        return Message::latest()->paginate($nbr);
+    }
+
+
+    public function getAd($message)
+    {
+        return $message->ad()->firstOrFail();
+    }
+
+    public function delete($message)
+    {
+        $message->delete();
+    }
+
+
+    public function getById($id)
+    {
+        return Message::findOrFail($id);
+    }
 }

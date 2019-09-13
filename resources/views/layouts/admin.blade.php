@@ -31,7 +31,7 @@
             <span>A modérer</span></a>
         </li>
         <li class="nav-item @if(request()->route()->getName() == 'admin.obsoletes') active @endif">
-            <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('admin.obsoletes') }}">
                 <i class="fas fa-fw fa-hourglass-end"></i>
             <span>Obsolètes</span></a>
         </li>
@@ -42,7 +42,7 @@
           Messages
         </div>
         <li class="nav-item @if(request()->route()->getName() == 'admin.messages') active @endif">
-            <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('admin.messages' ) }}">
                 <i class="fas fa-fw fa-question"></i>
             <span>A modérer</span></a>
         </li>

@@ -42,9 +42,22 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::prefix('annonces')->group(function(){
         Route::get('/', 'AdminController@ads')->name('admin.ads');
+        Route::get('obsoletes', 'AdminController@obsoletes')->name('admin.obsoletes');
         Route::middleware('ajax')->group(function () {
             Route::post('approve/{ad}', 'AdminController@approve')->name('admin.approve');
             Route::post('refuse', 'AdminController@refuse')->name('admin.refuse');
         });
+    });
+    Route::prefix('messages')->group(function () {
+        Route::get('/', 'AdminController@messages')->name('admin.messages');
+        Route::post('approve/{message}', 'AdminController@messageApprove')->name('admin.message.approve');
+        Route::post('refuse', 'AdminController@messageRefuse')->name('admin.message.refuse');
+    });
+});
+
+Route::prefix('admin/annonces')->group(function () {
+    Route::middleware('ajax')->group(function () {
+        Route::post('addweek/{ad}', 'AdminController@addWeek')->name('admin.addweek');
+        Route::delete('destroy/{ad}', 'AdminController@destroy')->name('admin.destroy');
     });
 });
